@@ -1,0 +1,131 @@
+﻿using QuadraticSortsInOneDimensionalArray;
+using SortInOneDimensionalArray;
+
+namespace Program
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            Console.Write("Введите количество элементов массива = ");
+            int n = Convert.ToInt32(Console.ReadLine());
+            int[] array = new int[n];
+            Console.Write("Как заполнить массив? (0 - рандомно, 1 - вручную)\n>> ");
+            int typeOfFill = Convert.ToInt32(Console.ReadLine());
+            if (typeOfFill == 0)
+            {
+                ActionWithArray.RandomFill(array);
+            }
+            else if (typeOfFill == 1)
+            {
+                ActionWithArray.ManuallyFill(array);
+            }
+            Console.WriteLine("Массив:");
+            ActionWithArray.Print(array);
+            Console.WriteLine("Выберете задание, введя его номер из списка:\n1. Разные сортировки массива\n2. Сортировка массива по возрастанию, начиная с первого четного элемента.");
+            int type = Convert.ToInt32(Console.ReadLine());
+            switch (type)
+            {
+                case 1:
+                    {
+                        Console.WriteLine("Выберите алгоритм сортировки, введя его номер из списка:" +
+                            "\n1. Пузырёк\n2. Пузырёк с флагом\n3. Шейкерная\n4. Методом простого выбора (простой перебор)\n5. Вставками" +
+                            "\n6. Сортировка Шелла\n7. Быстрая сортировка\n8. Сортировка слиянием");
+                        Console.Write(">> ");
+                        int choice = Convert.ToInt32(Console.ReadLine());
+                        switch (choice)
+                        {
+                            case 1:
+                                {
+                                    QuadraticSort.Bubble(array);
+                                    break;
+                                }
+                            case 2:
+                                {
+                                    QuadraticSort.BubbleWithFlag(array);
+                                    break;
+                                }
+                            case 3:
+                                {
+                                    QuadraticSort.Shaker(array);
+                                    break;
+                                }
+                            case 4:
+                                {
+                                    QuadraticSort.SimpleChoice(array);
+                                    break;
+                                }
+                            case 5:
+                                {
+                                    QuadraticSort.Insertion(array);
+                                    break;
+                                }
+                            case 6:
+                                {
+                                    QuadraticSort.Shell(array);
+                                    break;
+                                }
+                            case 7:
+                                {
+                                    LinearLogarithmicSort.QuickSort(array, 0, array.Length - 1);
+                                    break;
+                                }
+                            case 8:
+                                {
+                                    LinearLogarithmicSort.MergeSort(array);
+                                    break;
+                                }
+                            default:
+                                {
+                                    break;
+                                }
+                        }
+                        Console.WriteLine("Отсортированный массив:");
+                        ActionWithArray.Print(array);
+                        break;
+                    }
+                case 2:
+                    {
+                        int firstChetI = -1;
+                        int firstChet = 0;
+                        for(int k = 0; k < array.Length; k++)
+                        {
+                            if (array[k] % 2 == 0 && firstChetI == -1)
+                            {
+                                firstChetI = k;
+                                firstChet = array[k];
+                            }
+                        }
+                        if (firstChetI != -1)
+                        {
+                            int i, j, temp;
+                            for (i = firstChetI + 1; i < array.Length; i++)
+                            {
+                                for (j = firstChetI + 1; j < array.Length - 1; j++)
+                                {
+                                    if (array[j] > array[j + 1])
+                                    {
+                                        temp = array[j];
+                                        array[j] = array[j + 1];
+                                        array[j + 1] = temp;
+                                    }
+                                }
+                            }
+                        }
+                        ActionWithArray.SpecialPrint(array, firstChet);
+                        break;
+                    }
+                default:
+                    {
+                        break;
+                    }
+            }
+            Console.Write("Ещё раз? (0 - нет, 1 - да)\n>> ");
+            int repeat = Convert.ToInt32(Console.ReadLine());
+            if (repeat == 1)
+            {
+                Main(args);
+            }
+        }
+    }
+}

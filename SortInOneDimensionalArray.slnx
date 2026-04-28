@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Program/Program.csproj" />
+  <Project Path="SortInOneDimensionalArray/SortInOneDimensionalArray.csproj" />
+</Solution>
