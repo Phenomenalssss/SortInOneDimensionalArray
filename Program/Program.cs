@@ -32,7 +32,7 @@ namespace Program
                     {
                         Console.WriteLine("Выберите алгоритм сортировки, введя его номер из списка:" +
                             "\n1. Пузырёк\n2. Пузырёк с флагом\n3. Шейкерная\n4. Методом простого выбора (простой перебор)\n5. Вставками" +
-                            "\n6. Сортировка Шелла\n7. Быстрая сортировка\n8. Сортировка слиянием");
+                            "\n6. Сортировка Шелла\n7. Быстрая сортировка\n8. Сортировка слиянием\n9. Сортировка подсчётом\n10. LSD Radix Sort");
                         Console.Write(">> ");
                         int choice = Convert.ToInt32(Console.ReadLine());
                         switch (choice)
@@ -75,6 +75,16 @@ namespace Program
                             case 8:
                                 {
                                     LinearLogarithmicSort.MergeSort(array);
+                                    break;
+                                }
+                            case 9:
+                                {
+                                    LinearSort.Counting(array);
+                                    break;
+                                }
+                            case 10:
+                                {
+                                    LinearSort.LSDRadix(array);
                                     break;
                                 }
                             default:

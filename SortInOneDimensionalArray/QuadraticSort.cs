@@ -16,6 +16,7 @@
                         array[j + 1] = temp;
                     }
                 }
+                ActionWithArray.Print(array);
             }
         }
 
@@ -28,6 +29,7 @@
             {
                 exchange = false;
                 for (j = 0; j < array.Length - i; j++)
+                {
                     if (array[j] > array[j + 1])
                     {
                         t = array[j];
@@ -35,7 +37,9 @@
                         array[j + 1] = t;
                         exchange = true;
                     }
+                }
                 i++;
+                ActionWithArray.Print(array);
             }
             while (exchange);
         }
@@ -65,6 +69,7 @@
                         k = j;
                     }
                 R = k;
+                ActionWithArray.Print(array);
             }
             while (L < R);
         }
@@ -83,6 +88,7 @@
                 t = array[i];
                 array[i] = array[imin];
                 array[imin] = t;
+                ActionWithArray.Print(array);
             }
         }
 
@@ -93,8 +99,11 @@
             {
                 t = array[i];
                 for (j = i - 1; j >= 0 && array[j] > t; j--)
+                {
                     array[j + 1] = array[j];
+                }
                 array[j + 1] = t;
+                ActionWithArray.Print(array);
             }
         }
 
