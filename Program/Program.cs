@@ -22,7 +22,9 @@ namespace Program
             }
             Console.WriteLine("Массив:");
             ActionWithArray.Print(array);
-            Console.WriteLine("Выберете задание, введя его номер из списка:\n1. Разные сортировки массива\n2. Сортировка массива по возрастанию, начиная с первого четного элемента.");
+            Console.WriteLine("Выберете задание, введя его номер из списка:\n1. Разные сортировки массива\n2. Сортировка массива по возрастанию, начиная с первого четного элемента." +
+                "\n3. Поиск ai и bj в двух отсортированных по неубыванию массивах при условии того, что ai + bj = S");
+            Console.Write(">> ");
             int type = Convert.ToInt32(Console.ReadLine());
             switch (type)
             {
@@ -113,6 +115,57 @@ namespace Program
                             }
                         }
                         ActionWithArray.SpecialPrint(array, firstChet);
+                        break;
+                    }
+                case 3:
+                    {
+                        int[] arrayA = array;
+                        int[] arrayB = new int[n];
+                        Console.Write("Как заполнить второй массив? (0 - рандомно, 1 - вручную)\n>> ");
+                        typeOfFill = Convert.ToInt32(Console.ReadLine());
+                        if (typeOfFill == 0)
+                        {
+                            ActionWithArray.RandomFill(arrayB);
+                        }
+                        else if (typeOfFill == 1)
+                        {
+                            ActionWithArray.ManuallyFill(arrayB);
+                        }
+                        Console.WriteLine("Второй массив:");
+                        ActionWithArray.Print(arrayB);
+                        Console.WriteLine();
+                        Console.WriteLine("Отсортированный массив A:");
+                        LinearLogarithmicSort.MergeSort(arrayA);
+                        ActionWithArray.Print(arrayA);
+                        Console.WriteLine("Отсортированный массив B:");
+                        LinearLogarithmicSort.MergeSort(arrayB);
+                        ActionWithArray.Print(arrayB);
+                        Console.Write("Введите S = ");
+                        int S = Convert.ToInt32(Console.ReadLine());
+                        int countPair = 0;
+                        for(int i = 0, j = arrayB.Length - 1; i < arrayA.Length && j >= 0;)
+                        {
+                            if (arrayA[i] + arrayB[j] == S)
+                            {
+                                countPair++;
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine($"----- {countPair} -----");
+                                Console.ResetColor();
+                                Console.WriteLine($"{arrayA[i]} + {arrayB[j]} = {S}");
+                                Console.WriteLine($"i = {i}, j = {j}");
+                                Console.ResetColor();
+                                i++;
+                                j--;
+                            }
+                            else if (arrayA[i] + arrayB[j] < S)
+                            {
+                                i++;
+                            }
+                            else
+                            {
+                                j--;
+                            }
+                        }
                         break;
                     }
                 default:
