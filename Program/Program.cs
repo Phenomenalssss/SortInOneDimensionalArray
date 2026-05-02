@@ -7,29 +7,30 @@ namespace Program
     {
         public static void Main(string[] args)
         {
-            Console.Write("Введите количество элементов массива = ");
-            int n = Convert.ToInt32(Console.ReadLine());
-            int[] array = new int[n];
-            Console.Write("Как заполнить массив? (0 - рандомно, 1 - вручную)\n>> ");
-            int typeOfFill = Convert.ToInt32(Console.ReadLine());
-            if (typeOfFill == 0)
-            {
-                ActionWithArray.RandomFill(array);
-            }
-            else if (typeOfFill == 1)
-            {
-                ActionWithArray.ManuallyFill(array);
-            }
-            Console.WriteLine("Массив:");
-            ActionWithArray.Print(array);
             Console.WriteLine("Выберете задание, введя его номер из списка:\n1. Разные сортировки массива\n2. Сортировка массива по возрастанию, начиная с первого четного элемента." +
-                "\n3. Поиск ai и bj в двух отсортированных по неубыванию массивах при условии того, что ai + bj = S");
+                "\n3. Поиск ai и bj в двух отсортированных по неубыванию массивах при условии того, что ai + bj = S" +
+                "\n4. Проверить, можно ли путём перестановки всех цифр первого натурального числа получить второе второе число");
             Console.Write(">> ");
             int type = Convert.ToInt32(Console.ReadLine());
             switch (type)
             {
                 case 1:
                     {
+                        Console.Write("Введите количество элементов массива = ");
+                        int n = Convert.ToInt32(Console.ReadLine());
+                        int[] array = new int[n];
+                        Console.Write("Как заполнить массив? (0 - рандомно, 1 - вручную)\n>> ");
+                        int typeOfFill = Convert.ToInt32(Console.ReadLine());
+                        if (typeOfFill == 0)
+                        {
+                            ActionWithArray.RandomFill(array);
+                        }
+                        else if (typeOfFill == 1)
+                        {
+                            ActionWithArray.ManuallyFill(array);
+                        }
+                        Console.WriteLine("Массив:");
+                        ActionWithArray.Print(array);
                         Console.WriteLine("Выберите алгоритм сортировки, введя его номер из списка:" +
                             "\n1. Пузырёк\n2. Пузырёк с флагом\n3. Шейкерная\n4. Методом простого выбора (простой перебор)\n5. Вставками" +
                             "\n6. Сортировка Шелла\n7. Быстрая сортировка\n8. Сортировка слиянием\n9. Сортировка подсчётом\n10. LSD Radix Sort");
@@ -98,6 +99,21 @@ namespace Program
                     }
                 case 2:
                     {
+                        Console.Write("Введите количество элементов массива = ");
+                        int n = Convert.ToInt32(Console.ReadLine());
+                        int[] array = new int[n];
+                        Console.Write("Как заполнить массив? (0 - рандомно, 1 - вручную)\n>> ");
+                        int typeOfFill = Convert.ToInt32(Console.ReadLine());
+                        if (typeOfFill == 0)
+                        {
+                            ActionWithArray.RandomFill(array);
+                        }
+                        else if (typeOfFill == 1)
+                        {
+                            ActionWithArray.ManuallyFill(array);
+                        }
+                        Console.WriteLine("Массив:");
+                        ActionWithArray.Print(array);
                         int firstChetI = -1;
                         int firstChet = 0;
                         for(int k = 0; k < array.Length; k++)
@@ -129,6 +145,21 @@ namespace Program
                     }
                 case 3:
                     {
+                        Console.Write("Введите количество элементов первого и второго массива = ");
+                        int n = Convert.ToInt32(Console.ReadLine());
+                        int[] array = new int[n];
+                        Console.Write("Как заполнить первый массив? (0 - рандомно, 1 - вручную)\n>> ");
+                        int typeOfFill = Convert.ToInt32(Console.ReadLine());
+                        if (typeOfFill == 0)
+                        {
+                            ActionWithArray.RandomFill(array);
+                        }
+                        else if (typeOfFill == 1)
+                        {
+                            ActionWithArray.ManuallyFill(array);
+                        }
+                        Console.WriteLine("Первый массив:");
+                        ActionWithArray.Print(array);
                         int[] arrayA = array;
                         int[] arrayB = new int[n];
                         Console.Write("Как заполнить второй массив? (0 - рандомно, 1 - вручную)\n>> ");
@@ -175,6 +206,50 @@ namespace Program
                             {
                                 j--;
                             }
+                        }
+                        break;
+                    }
+                case 4:
+                    {
+                        Console.Write("Введите первое натуральное число = ");
+                        int n = Convert.ToInt32(Console.ReadLine());
+                        Console.Write("Введите второе натуральное число = ");
+                        int m = Convert.ToInt32(Console.ReadLine());
+                        int[] arrayN = new int[n.ToString().Length];
+                        int[] arrayM = new int[m.ToString().Length];
+                        int i = 0;
+                        foreach(var number in n.ToString())
+                        {
+                            arrayN[i] = Convert.ToInt32(number.ToString());
+                            i++;
+                        }
+                        i = 0;
+                        foreach (var number in m.ToString())
+                        {
+                            arrayM[i] = Convert.ToInt32(number.ToString());
+                            i++;
+                        }
+                        LinearSort.Counting(arrayN);
+                        LinearSort.Counting(arrayM);
+                        n = 0;
+                        foreach(var number in arrayN)
+                        {
+                            n *= 10;
+                            n += number;
+                        }
+                        m = 0;
+                        foreach (var number in arrayM)
+                        {
+                            m *= 10;
+                            m += number;
+                        }
+                        if (n == m)
+                        {
+                            Console.WriteLine("YES");
+                        }
+                        else
+                        {
+                            Console.WriteLine("NO");
                         }
                         break;
                     }
